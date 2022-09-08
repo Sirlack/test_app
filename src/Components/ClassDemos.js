@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Additions from './Additions';
-import {increment,decrement} from '../Actions/Action';
+import {increment,decrement,newValue} from '../Actions/Action';
 import store from '../Store/Store';
 import { connect } from 'react-redux'
 //import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ function pepe(){
     popo =  'Jolines';
 }
 const mapStateToProps = state => {
-    return { Name: state.parent.children2 };
+    return { Name: state.parent.children2, storeNewField: state.parent.children3 };
   };
 class ClassDemos extends React.Component{
 
@@ -36,13 +36,15 @@ class ClassDemos extends React.Component{
 
         <div>
             <Additions></Additions>
+            <h1>Hello props.storeNewField {this.props.storeNewField}</h1>
             <h1>Hello props.name {this.props.Name}</h1>
             <h1>Hello state name {this.state.name}</h1>
-            <h1>Hello state nameStore {this.state.nameStore}</h1>
+            <h1>Hello state nameStore {this.state.nameStore}</h1>            
             {/*<h1>Hello store value {store.getState().value}</h1>*/}
             <h1>Hello global variable{popo}</h1>
             <input type="text" class="form-control" id="usr"></input>
             {/*<button  onClick={() => store.dispatch(this.props.increment())}>Dispatch action</button>*/}
+            <button  onClick={() => this.props.newValue()}>Dispatch action create new value in the store</button>
             <button  onClick={() => this.props.increment()}>Dispatch action increment</button>
             <button  onClick={() => this.props.decrement()}>Dispatch action decrement</button>
             <button  onClick={() => this.classMod()}>State Modification</button>
@@ -56,5 +58,5 @@ class ClassDemos extends React.Component{
     }
 
 }
-export default connect(mapStateToProps, {increment,decrement})(ClassDemos)
+export default connect(mapStateToProps, {increment,decrement,newValue})(ClassDemos)
 //export default ClassDemos

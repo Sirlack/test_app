@@ -18,7 +18,9 @@ function parent(state = [], action = {}) {
         // modificamos lo que necesitamos
         //copy.push(action.payload.text);
         // retornamos el nuevo estado
-        return {children1:'decrement1',children2:'decrement2'};  
+        return {children1:'decrement1',children2:'decrement2'};
+        case "counter/newValue":
+        return {children1:'decrement1',children2:'decrement2',children3:'newValue'};  
     default:
       // si el action.type no existe o no concuerda
       // con ningunos de los casos definidos

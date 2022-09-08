@@ -12,6 +12,11 @@ const increment = () => {
     }
   }  
 
+  const newValue = () => {
+    return {      
+      type: 'counter/newValue'
+    }
+  }  
   export default increment
-  export  {increment,decrement}
+  export  {increment,decrement,newValue}
   
