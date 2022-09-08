@@ -17,6 +17,14 @@ const increment = () => {
       type: 'counter/newValue'
     }
   }  
+
+  const addValue = (payload) => {
+    return {      
+      type: 'counter/addValue',
+      payload : payload
+    }
+  }  
+
   export default increment
-  export  {increment,decrement,newValue}
+  export  {increment,decrement,newValue,addValue}
   

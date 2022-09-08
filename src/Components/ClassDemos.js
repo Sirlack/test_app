@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Additions from './Additions';
-import {increment,decrement,newValue} from '../Actions/Action';
+import {increment,decrement,newValue,addValue} from '../Actions/Action';
 import store from '../Store/Store';
 import { connect } from 'react-redux'
 //import { useSelector, useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ function pepe(){
     popo =  'Jolines';
 }
 const mapStateToProps = state => {
-    return { Name: state.parent.children2, storeNewField: state.parent.children3 };
+    return { Name: state.parent.children2, storeNewField: state.parent.children3, externalPayload: state.parent.children4 };
   };
 class ClassDemos extends React.Component{
 
@@ -28,6 +28,13 @@ class ClassDemos extends React.Component{
             nameStore : store.getState().parent.children1
         }
     }
+
+    async callApi(){
+        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo')
+        .then(response => response.json())
+        .then(data => this.props.addValue(data)  );
+    } 
+
     
     render(){
         //const dispatch = useDispatch();
@@ -49,7 +56,8 @@ class ClassDemos extends React.Component{
             <button  onClick={() => this.props.decrement()}>Dispatch action decrement</button>
             <button  onClick={() => this.classMod()}>State Modification</button>
             <button  onClick={() => pepe()}>Modificación Global variable</button>
-            
+            <button  onClick={() => this.callApi()}>Add value in the store from external API</button>            
+            {<h1>External payload:  {this.props.externalPayload ? JSON.stringify(this.props.externalPayload) : ""}</h1> }
             
         </div>
         );    
@@ -58,5 +66,5 @@ class ClassDemos extends React.Component{
     }
 
 }
-export default connect(mapStateToProps, {increment,decrement,newValue})(ClassDemos)
+export default connect(mapStateToProps, {increment,decrement,newValue,addValue})(ClassDemos)
 //export default ClassDemos
