@@ -5,6 +5,9 @@ import {increment,decrement,newValue,addValue} from '../Actions/Action';
 import store from '../Store/Store';
 import { connect } from 'react-redux'
 //import { useSelector, useDispatch } from 'react-redux';
+import '../CSS/styles.module.css';
+import Chart from './Chart';
+
 
 let popo;
 
@@ -52,12 +55,13 @@ class ClassDemos extends React.Component{
             <input type="text" class="form-control" id="usr"></input>
             {/*<button  onClick={() => store.dispatch(this.props.increment())}>Dispatch action</button>*/}
             <button  onClick={() => this.props.newValue()}>Dispatch action create new value in the store</button>
-            <button  onClick={() => this.props.increment()}>Dispatch action increment</button>
-            <button  onClick={() => this.props.decrement()}>Dispatch action decrement</button>
-            <button  onClick={() => this.classMod()}>State Modification</button>
-            <button  onClick={() => pepe()}>Modificación Global variable</button>
-            <button  onClick={() => this.callApi()}>Add value in the store from external API</button>            
+            <button class="btn btn-primary" onClick={() => this.props.increment()}>Dispatch action increment</button>
+            <button class="btn btn-primary" onClick={() => this.props.decrement()}>Dispatch action decrement</button>
+            <button class="btn btn-primary" onClick={() => this.classMod()}>State Modification</button>
+            <button class="btn btn-primary" onClick={() => pepe()}>Modificación Global variable</button>
+            <button class="btn btn-primary" onClick={() => this.callApi()}>Add value in the store from external API</button>            
             {<h1>External payload:  {this.props.externalPayload ? JSON.stringify(this.props.externalPayload) : ""}</h1> }
+            <Chart></Chart>
             
         </div>
         );    
