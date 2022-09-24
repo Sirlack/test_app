@@ -7,10 +7,11 @@ import { connect } from 'react-redux'
 //import { useSelector, useDispatch } from 'react-redux';
 import '../CSS/styles.module.css';
 import Chart from './Chart';
+import Chart2 from './Chart2';
 
 
 let popo;
-
+let value = false;
 function pepe(){
     //popo =  store.getState().value;
     popo =  'Jolines';
@@ -21,6 +22,7 @@ const mapStateToProps = state => {
 class ClassDemos extends React.Component{
 
 
+    
     classMod(){
         this.setState({name: 'Clasical',  nameStore : 'Music'/*store.getState().value*/});
     }
@@ -28,19 +30,44 @@ class ClassDemos extends React.Component{
         super(props);
         this.state={
             name: props.Name,
-            nameStore : store.getState().parent.children1
+            nameStore : store.getState().parent.children1,        
         }
+    }
+    setVis(){
+        value = true;
     }
 
     async callApi(){
-        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo')
+        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=IBM&apikey=I64PI21AOKWDAHSG')
         .then(response => response.json())
-        .then(data => this.props.addValue(data)  );
+        .then(data =>{             
+           
+            let Response;
+            //CHART2
+            Response = {value1:new Array(),value2:new Array(),time:new Array()};
+            const objectArrayData = Object.entries(data["Monthly Adjusted Time Series"]);
+            objectArrayData.forEach(
+                time => {
+                    Response.value1.push( time[1]["1. open"]);
+                    Response.value2.push( time[1]["1. open"]);
+                    Response.time.push(time[0]);
+    
+                }
+                );
+            //CHART      
+            const objectArray = Object.entries(data["Monthly Adjusted Time Series"]);
+            let objectArray2 = objectArray.map(
+                function(value){ 
+                    return {time: value[0],value: value[1]["1. open"]}}
+                );
+           Response.chart =  objectArray2;
+           this.props.addValue(Response);
+        });
     } 
 
     
     render(){
-        //const dispatch = useDispatch();
+        
         return (
             
 
@@ -60,8 +87,14 @@ class ClassDemos extends React.Component{
             <button class="btn btn-primary" onClick={() => this.classMod()}>State Modification</button>
             <button class="btn btn-primary" onClick={() => pepe()}>Modificación Global variable</button>
             <button class="btn btn-primary" onClick={() => this.callApi()}>Add value in the store from external API</button>            
-            {<h1>External payload:  {this.props.externalPayload ? JSON.stringify(this.props.externalPayload) : ""}</h1> }
+            {/*button class="btn btn-primary" onClick={() => this.setVis()}>Set visible graf.</button>*/}
+            {/*<h1>External payload:  {this.props.externalPayload ? JSON.stringify(this.props.externalPayload) : ""}</h1> */}
             <Chart></Chart>
+            
+            <Chart2 data={this.props.externalPayload}></Chart2>
+            
+            
+            
             
         </div>
         );    

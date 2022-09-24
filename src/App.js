@@ -18,7 +18,7 @@ class App extends Component{
      
         <img src={logo} className="App-logo" alt="logo" />      
        <ClassDemo Name={store.getState().parent.children1}></ClassDemo>
-       <ClassDemo Name={'Nacho'}></ClassDemo>
+       {/*<ClassDemo Name={'Nacho'}></ClassDemo>*/}
        
              
     </div>
