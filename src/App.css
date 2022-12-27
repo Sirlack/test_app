@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+html, body {
+  height: 80%;
+}
+.full-height,#full-height {
+  height: 100%;
+}
+#root {
+  height: 100%;
+}
+#pepe {
+  height: 100%;
+}
+#lat-izq,#lat-der {
+  background-color: lightblue;
+}
+#cent{
+  background-color: lightsalmon;
+}

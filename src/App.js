@@ -4,6 +4,7 @@ import './App.css';
 import Addition from './Components/Added'
 import ClassDemo from './Components/ClassDemos'
 import store from './Store/Store';
+import SelectSharing from './Components/Form/SelectSharing'
 
 
 // Creamos un store de Redux almacenando el estado de la aplicación.
@@ -14,14 +15,11 @@ class App extends Component{
 
   render(){
     return(
-    <div className="App"> 
-     
-        <img src={logo} className="App-logo" alt="logo" />      
-       <ClassDemo Name={store.getState().parent.children1}></ClassDemo>
-       {/*<ClassDemo Name={'Nacho'}></ClassDemo>*/}
-       
-             
-    </div>
+      <>
+        <SelectSharing></SelectSharing>
+        <ClassDemo></ClassDemo>
+      </>
+          
   );
 }
 }
