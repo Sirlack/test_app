@@ -10,15 +10,15 @@ import {
   const yScale = scaleLinear().domain([40, 220])  
 
   const mapStateToProps = state => {
-    return { Name: state.parent.children2, storeNewField: state.parent.children3, externalPayload: state.parent.children4 };
+    return { Name: state.parent.children2, storeNewField: state.parent.children3, l_externalPayload: state.parent.externalPayload };
   };
 class Chart extends React.Component{
     render(){       
                        
         return (
-            this.props.externalPayload && <ChartProvider
+            this.props.l_externalPayload && <ChartProvider
                 height={400}
-                data={ this.props.externalPayload.chart}
+                data={ this.props.l_externalPayload.chart}
                 yScale = {yScale} 
             >
                 <XAxis dataKey="time" />

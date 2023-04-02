@@ -1,11 +1,8 @@
 import { createStore } from 'redux';
 import reducers from "../Redux/reducers";
 
-//import { connect } from 'react-redux'
-//import { increment, decrement } from './actionCreators'
 
-
-const initialState = { parent: { children1 :'children1', children2: 'children2'}}
+const initialState = { parent: { value : 0, externalPayload: '',localPayload:'' }}
 // Creamos un store de Redux almacenando el estado de la aplicación.
 // Su API es { subscribe, dispatch, getState }.
 let store = createStore(reducers,initialState);

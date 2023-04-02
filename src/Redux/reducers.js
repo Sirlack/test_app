@@ -4,29 +4,24 @@ import { combineReducers } from "redux";
 
 
 function parent(state = [], action = {}) {
+  let copy = {...state};
   switch (action.type) {
+    
     case "counter/increment":
-      // creamos una copia del estado actual
-      const copy = Array.from(state);
-      // modificamos lo que necesitamos
-      //copy.push(action.payload.text);
-      // retornamos el nuevo estado
-      return {children1:'increment1',children2:'increment2'};
-      case "counter/decrement":
-        // creamos una copia del estado actual
-        //const copy = Array.from(state);
-        // modificamos lo que necesitamos
-        //copy.push(action.payload.text);
-        // retornamos el nuevo estado
-        return {children1:'decrement1',children2:'decrement2'};
-        case "counter/newValue":        
-        
-        return {children1:'decrement1',children2:'decrement2',children3:'newValue'};  
-
-        case "counter/addValue":
-          
-
-        return {children1:'decrement1',children2:'decrement2',children3:'newValue',children4: action.payload};                 
+      copy.value++;
+      return {...copy};
+    case "counter/decrement":
+      copy.value--;
+      return {...copy};
+    case "counter/newValue":        
+      copy.value = 0;
+      return {...copy};  
+    case "counter/addValue":
+      copy.externalPayload = action.payload;
+      return {...copy};  
+    case "api/localcall":
+      copy.localPayload = action.payload;  
+      return {...copy};
     default:
       // si el action.type no existe o no concuerda
       // con ningunos de los casos definidos

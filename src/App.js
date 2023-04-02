@@ -2,9 +2,9 @@ import React,{Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Addition from './Components/Added'
-import ClassDemo from './Components/ClassDemos'
+import ClassDemo from './Components/Forms/ClassDemos'
 import store from './Store/Store';
-import SelectSharing from './Components/Form/SelectSharing';
+import SelectSharing from './Components/Forms/SelectSharing';
 import { Route,Routes,BrowserRouter } from 'react-router-dom'
 
 

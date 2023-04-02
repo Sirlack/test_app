@@ -23,8 +23,14 @@ const increment = () => {
       type: 'counter/addValue',
       payload : payload
     }
-  }  
+  } 
+  const showlocalcall = (payload) => {
+    return {
+      type: 'api/localcall',
+      payload: payload
+    }
+  }
 
   export default increment
-  export  {increment,decrement,newValue,addValue}
+  export  {increment,decrement,newValue,addValue,showlocalcall}
   
