@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import '../../CSS/styles.module.css';
 import Chart from '../Charts/Chart';
 import Chart2 from '../Charts/Chart2';
+import ExternalCalls from '../../Helper/ExternalCalls'; 
 
 
 let g_test;
@@ -16,7 +17,8 @@ function funcGlobalTest(){
     g_test =  'Global function executed';
 }
 const mapStateToProps = state => {
-    return { value: state.parent.value, externalPayload: state.parent.externalPayload, localPayload: state.parent.localPayload };
+    return { 
+        value: state.parent.value, externalPayload: state.parent.externalPayload, localPayload: state.parent.localPayload };
   };
 class ClassDemos extends React.Component{
 
@@ -94,7 +96,7 @@ class ClassDemos extends React.Component{
             <button class="btn btn-primary" onClick={() => this.classMod()}>State Class Modification</button>
             <button class="btn btn-primary" onClick={() => funcGlobalTest()}>Modificación Global variable</button>
             <button class="btn btn-primary" onClick={() => this.callApi()}>Add value in the store from external API</button>            
-            <button class="btn btn-primary" onClick={() => this.callLocalApi()}>Call local api</button>            
+            <button class="btn btn-primary" onClick={() => ExternalCalls.callLocalApi(this.props.showlocalcall)}>Call local api</button>            
 
             <Chart></Chart>            
             <Chart2 data={this.props.externalPayload}></Chart2>
