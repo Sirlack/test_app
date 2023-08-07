@@ -20,10 +20,8 @@ const mapStateToProps = state => {
     return { 
         value: state.parent.value, externalPayload: state.parent.externalPayload, localPayload: state.parent.localPayload };
   };
-class ClassDemos extends React.Component{
 
-
-    
+  class ClassDemos extends React.Component{
     classMod(){
         this.setState({name: this.props.value,  nameStore : store.getState().parent.value});
     }
@@ -36,47 +34,7 @@ class ClassDemos extends React.Component{
     }
     setVis(){
         value = true;
-    }
-
-    async callLocalApi(){
-        fetch('http://localhost:8080/test/entity1')
-        .then(response => response.json())
-        .then(data => {
-            this.props.showlocalcall(data);
-        })
-        
-    }
-
-    async callApi(){
-        fetch('https://www.alphavantage.co/query?function=TIME_SERIES_MONTHLY_ADJUSTED&symbol=IBM&apikey=I64PI21AOKWDAHSG')
-        .then(response => response.json())
-        .then(data =>{ 
-                      
-           
-            let Response;
-            //CHART2
-            Response = {value1:new Array(),value2:new Array(),time:new Array()};
-            const objectArrayData = Object.entries(data["Monthly Adjusted Time Series"]);
-            objectArrayData.forEach(
-                time => {
-                    Response.value1.push( time[1]["1. open"]);
-                    Response.value2.push( time[1]["1. open"]);
-                    Response.time.push(time[0]);
-    
-                }
-                );
-            //CHART      
-            const objectArray = Object.entries(data["Monthly Adjusted Time Series"]);
-            let objectArray2 = objectArray.map(
-                function(value){ 
-                    return {time: value[0],value: value[1]["1. open"]}}
-                );
-           Response.chart =  objectArray2;
-           this.props.addValue(Response);
-        });
-    } 
-
-    
+    }    
     render(){
         
         return (
@@ -95,7 +53,7 @@ class ClassDemos extends React.Component{
             <button class="btn btn-primary" onClick={() => this.props.decrement()}>Dispatch action decrement</button>
             <button class="btn btn-primary" onClick={() => this.classMod()}>State Class Modification</button>
             <button class="btn btn-primary" onClick={() => funcGlobalTest()}>Modificación Global variable</button>
-            <button class="btn btn-primary" onClick={() => this.callApi()}>Add value in the store from external API</button>            
+            <button class="btn btn-primary" onClick={() => ExternalCalls.callApi(this.props.addValue)}>Add value in the store from external API</button>            
             <button class="btn btn-primary" onClick={() => ExternalCalls.callLocalApi(this.props.showlocalcall)}>Call local api</button>            
 
             <Chart></Chart>            
